@@ -80,5 +80,40 @@ raxmlHPC-PTHREADS-SSE3 -T 20 -f a -x 1001 -p 14850 -N autoMRE -m ASC_GTRGAMMA --
 ```
 
 ### PSMC
+We used the Pairwise Sequential Markovian Coalescent [PSMC](https://github.com/lh3/psmc) model to infer historical changes in effective population sizes (Ne) in the black-throated finch and long-tailed finch. Analysis was restricted to samples with sufficient whole genome sequence data available for PSMC inference (i.e., depth of coverage ≥20×): *atropygialis*, N = 1; *cincta*, N = 1; and *hecki* N = 6. Diploid consensus sequences were generated for each sample using the [samtools](https://github.com/samtools/samtools) (v1.6) mpileup, [bcftools](http://samtools.github.io/bcftools/bcftools.html) (v1.9) call, and the ‘vcf2fq’ function from the vcfutils.pl perl script. We only considered the 29 largest autosomal chromosomes, filtered sites with a base and mapping quality below 30, a lower depth of coverage threshold of 10, and an upper depth of coverage threshold equal to twice the mean depth of coverage for each sample. Default parameters were used for PSMC module fq2psmcfa, except that we used a quality filter of 30 and a bin size of 50 bp, to account for the higher density of heterozygous sites in finches compared to humans.
 
 ### fastsimcoal
+We performed demographic inference at two timescales. In the first, focused on the dynamics of black-throated finch subspecies, we modeled the demographic histories of *atropygialis* and *cincta*. In the second, focused on the dynamics within *cincta*, we modeled the demographic histories of remaining population stronghold from the Townsville Coastal Plain and the Galilee Basin. For both analyses, we used our ddRAD dataset, built two-dimension site frequency spectra (2D-SFS) using [easySFS](https://github.com/isaacovercast/easySFS), and utilized hypergeometric down projection of the allelic sample size to maximize the number of segregating sites per lineage.
+
+```
+## The example below generates 2D-SFS using the ddRAD dataset with easySFS.py
+./easySFS.py -i autosomal.btfs_ltfs.no_captives.mm85.vcf.gz \
+       -p pops_file.txt \
+       --window-bp 1000 \
+       --order hec,atr,cin \
+       --proj 20,170,220 \
+       -o input_sfs_data
+```
+
+We tested an initial suite of two-population models that encompassed 12 scenarios that varied in a) the timing of divergence, b) the number of distinct migration rates, c) the number and nature of population size fluctuations, and d) the size of ancestral populations. We performed 100 independent parameter runs per model using the following options: -n 100000 -L 100 -C 1 -y 5 -0 -m -q –logprecision 18 –brentol 0.0001.
+
+```
+folder="/mendel-nas1/dhooper/bin/miniconda3/envs/fastsimcoal/bin"
+
+## Select desired demographic model
+prefix="2Pop2Mig2Size"
+
+## Use fastsimcoal2 v27 to model various demographic histories of the black-throated finch
+## Perform 100 replicates
+cd ${prefix}
+for i in {1..100}; do
+        date;
+        mkdir run$i;
+        cp ${prefix}.tpl ${prefix}.est ${prefix}_jointMAFpop1_0.obs run$i"/";
+        cd run$i;
+        fsc27093 -t ${prefix}.tpl -e ${prefix}.est -m -0 -C 1 -n 100000 -L 100 -s 0 -y 5 --logprecision 18 --brentol 0.001 -M -q -c 6 -B 6;
+        cd ..;
+done
+
+```
+
