@@ -57,13 +57,39 @@ We counted the number of private alleles in each taxon and sampling location usi
 ## heterozygosity, relatedness, and inbreeding
 
 ### observed heterozygosity
-We compared genetic diversity in each of our three taxa based on the observed number of heterozygous genotypes in each sample. For the WGS dataset, we estimated mean site-based heterozygosity as the number of heterozygous genotypes on the 29 largest autosomal chromosomes divided by the summed non-repeat masked length of these chromosomes. For the ddRAD dataset, we estimated mean site-based heterozygosity as the total number of heterozygous autosomal genotypes divided by the total number of autosomal SNPs. To account for variation in missingness per sample in the ddRAD dataset, we removed 5 samples missing data at more than 20% of sites and then restricted analyses to the set of SNPs without any missing data across the remaining 251 samples. Counts of heterozygous genotypes were performed using [bcftools](http://samtools.github.io/bcftools/bcftools.html) (v1.9) without a minor allele frequency filter. 
+We compared genetic diversity in each of our three taxa based on the observed number of heterozygous genotypes in each sample. For the WGS dataset, we estimated mean site-based heterozygosity as the number of heterozygous genotypes on the 29 largest autosomal chromosomes divided by the summed non-repeat masked length of these chromosomes. For the ddRAD dataset, we estimated mean site-based heterozygosity as the total number of heterozygous autosomal genotypes divided by the total number of autosomal SNPs. To account for variation in missingness per sample in the ddRAD dataset, we removed 5 samples missing data at more than 20% of sites and then restricted analyses to the set of SNPs without any missing data across the remaining 251 samples. Counts of heterozygous genotypes were performed using [bcftools](http://samtools.github.io/bcftools/bcftools.html) (v1.9) without a minor allele frequency filter.
+
+```
+## Use bcftools to count the number of autosomal heterozygous sites without any missing data in the ddRAD dataset
+
+cd /mendel-nas1/dhooper/ddRAD/heterozygosity
+out_dir="/mendel-nas1/dhooper/ddRAD/heterozygosity/results"
+
+## Restrict analysis to the set of 251 samples with less than 20% missing data
+cat samples.miss20.list | while read LINE; do
+        bcftools query -s ${LINE} -i 'GT="0|1" | GT="0/1"' -f '%CHROM:%POS\n' 240709.BTFs.LTFs.no_missing_data_autosomal.vcf.gz | wc -l > ${out_dir}/${LINE}.autosomal.het_sites.miss20.out;
+done
+```
 
 ### pairwise relatedness
 We examined variation in relatedness within and between our sampled populations by calculating the pairwise kinship coefficient between all samples in the ddRAD dataset using [KING](https://www.kingrelatedness.com) (v2.3.1). We defined 1st degree (kinship ≥0.18-0.35), 2nd degree (kinship ≥0.09-0.18), and 3rd degree (kinship ≥0.04-0.09) relatives based on the expected distribution of pairwise kinship coefficients for these relationships.
 
 ### runs of homozygosity
 We evaluated evidence of inbreeding across populations in our sample set by contrasting the proportion of the genome observed in runs of homozygosity (i.e., FROH). We additionally evaluated the number and lengths of runs of homozygosity (ROH) across the genome as the length distribution of ROH can be especially informative about the timing of inbreeding events. We classified ROH and estimated FROH using autosomal SNPs with [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09) with default parameter tuning. We did not perform LD pruning or allele frequency filtering of this dataset because of the downward-biased effect of these filters on estimates of FROH. We restricted ROH analysis to the WGS dataset because it has a marker density two orders of magnitude greater than the ddRAD dataset (WGS: 25.6 SNPs per kb; ddRAD: 0.26 SNPs per kb).
+
+```
+## Use plink to evaluate ROH in the BTF and LTF samples using the WGS dataset
+## Note that we need to use the plink dataset without LD-pruning
+
+cd /mendel-nas1/dhooper/BTFs/popgen
+
+## Step #1: Use plink to calculate ROH
+INPUT="wg.btfs_ltfs.repeatmask"
+
+## Run with default parameter tuning
+plink --bfile ${INPUT} --allow-extra-chr --chr-set 40 --not-chr chrZ --homozyg --out roh_analysis
+rm *nosex
+```
 
 ## demographic inference
 
@@ -81,6 +107,33 @@ raxmlHPC-PTHREADS-SSE3 -T 20 -f a -x 1001 -p 14850 -N autoMRE -m ASC_GTRGAMMA --
 
 ### PSMC
 We used the Pairwise Sequential Markovian Coalescent [PSMC](https://github.com/lh3/psmc) model to infer historical changes in effective population sizes (Ne) in the black-throated finch and long-tailed finch. Analysis was restricted to samples with sufficient whole genome sequence data available for PSMC inference (i.e., depth of coverage ≥20×): *atropygialis*, N = 1; *cincta*, N = 1; and *hecki* N = 6. Diploid consensus sequences were generated for each sample using the [samtools](https://github.com/samtools/samtools) (v1.6) mpileup, [bcftools](http://samtools.github.io/bcftools/bcftools.html) (v1.9) call, and the ‘vcf2fq’ function from the vcfutils.pl perl script. We only considered the 29 largest autosomal chromosomes, filtered sites with a base and mapping quality below 30, a lower depth of coverage threshold of 10, and an upper depth of coverage threshold equal to twice the mean depth of coverage for each sample. Default parameters were used for PSMC module fq2psmcfa, except that we used a quality filter of 30 and a bin size of 50 bp, to account for the higher density of heterozygous sites in finches compared to humans.
+
+```
+## Prepare whole-genome diploid consensus sequence for PSMC analysis
+
+## Set run variables and parameter tuning
+ref="/mendel-nas1/dhooper/reference/GCF_003957565.2_bTaeGut1.4.fasta"
+positions="/mendel-nas1/dhooper/fastq/bam/psmc/GCF_003957565.2_bTaeGut1.4.pri.positions.29_largest_autosomes.bed"
+bam="BT01.merge.mkdup.bam"
+runBC=`basename $bam .bam`
+sample=`echo $runBC | cut -f1 -d'.'`
+lower="10"
+upper="110"
+out_dir="/mendel-nas1/dhooper/BTFs/psmc"
+
+## Generate consensus sequence
+samtools mpileup -l ${positions} -Q 30 -q 30 -u -v -f ${ref} ${bam} | bcftools call -c | vcfutils.pl vcf2fq -d ${lower} -D ${upper} -Q 30 | gzip > ${out_dir}/${sample}.Q30.autosomal.fq.gz
+
+## Generate psmcfa file
+fq2psmcfa -s50 -q30 ${sample}.Q30.autosomal.fq.gz > ${sample}.Q30.s50.psmcfa
+
+## Generate boostrap replicates
+splitfa ${sample}.Q30.autosomal.fq.gz > ${sample}.split.psmcfa
+
+## Run PSMC
+psmc -N30 -t15 -r5 -p "2+2+25*2+4+6" -o ${sample}.Q30.s50.hilgers.psmc ${sample}.Q30.s50.psmcfa
+
+```
 
 ### fastsimcoal
 We performed demographic inference at two timescales. In the first, focused on the dynamics of black-throated finch subspecies, we modeled the demographic histories of *atropygialis* and *cincta*. In the second, focused on the dynamics within *cincta*, we modeled the demographic histories of remaining population stronghold from the Townsville Coastal Plain and the Galilee Basin. For both analyses, we used our ddRAD dataset, built two-dimension site frequency spectra (2D-SFS) using [easySFS](https://github.com/isaacovercast/easySFS), and utilized hypergeometric down projection of the allelic sample size to maximize the number of segregating sites per lineage.
