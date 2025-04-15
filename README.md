@@ -13,16 +13,16 @@ Software and programs used in this pipeline:
 - [GATK](https://gatk.broadinstitute.org/hc/en-us)
 - [RepeatModeler](https://github.com/Dfam-consortium/RepeatModeler)
 - [vcftools](https://vcftools.sourceforge.net)
-- [plink](https://www.cog-genomics.org/plink/1.9/)
-- [fastStructure](https://rajanil.github.io/fastStructure/)
+- [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09)
+- [fastStructure](https://rajanil.github.io/fastStructure/) (v1.0)
 - [FEEMS](https://github.com/NovembreLab/feems)
 - [ParseVCF_private.pl](https://github.com/ehshogren/MyzomelaPopulationGenomics/blob/main/ParseVCF_private.pl)
-- [KING](https://www.kingrelatedness.com)
-- [RAxML](https://github.com/stamatak/standard-RAxML)
+- [KING](https://www.kingrelatedness.com) (v2.3.1)
+- [RAxML](https://github.com/stamatak/standard-RAxML) (v8.2.4)
 - [vcf2phylip](https://github.com/edgardomortiz/vcf2phylip)
 - [PSMC](https://github.com/lh3/psmc)
   - [vcfutils.pl](https://github.com/lh3/samtools/blob/master/bcftools/vcfutils.pl)
-- [fastsimcoal27](https://cmpg.unibe.ch/software/fastsimcoal27/)
+- [fastsimcoal27](https://cmpg.unibe.ch/software/fastsimcoal27/) (v2.7)
 - [R](https://www.r-project.org) (v4.2.1)
 
 ## Contents
@@ -36,27 +36,39 @@ Linked-read and short read WGS data used in this project was previously generate
 
 ## population structure, genetic differentiation, and summary statistics
 
-### principal components analyses (PCA)
+### principal component analysis (PCA)
+We performed PCA with [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09) using the full dataset and sequential subsets of the full dataset. First, using both black-throated finch and long-tailed finch samples. Second, only using samples from the two black-throated finch subspecies. Third, only using samples from the endangered black-throated finch subspecies *cincta*. For the WGS dataset, we removed SNPs <1 kb apart, with a minor allele frequency less than 0.05, and genotyped in less than 0.95 of samples. For the ddRAD dataset, we removed singleton sites and SNPs <1 kb apart.
 
 ### faststructure
+Genotype data for black-throated finches was prepared by removing SNPs found in linkage disequilibrium (i.e., r2 > 0.2) in 100 kb windows and 10 kb steps using [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09). We then ran [fastStructure](https://rajanil.github.io/fastStructure/) (v1.0) with ten cross-validation tests and values of K ranging from 2 to 4. The optimal model complexity was determined using the chooseK.py function of fastStructure. We restricted this analysis to the ddRAD dataset due to the greater breadth (i.e., sampled populations) and depth (i.e., sampled individuals) of coverage compared to the WGS dataset.
 
 ### FEEMS
+The program [FEEMS](https://github.com/NovembreLab/feems) (Fast Estimation of Effective Migration Surfaces) uses a Gaussian Markov Random Field model to infer and visualize spatially heterogeneous isolation-by-distance patterns (i.e., effective migration rates) on a geographic surface. We generated a genetic distance matrix between samples using a set of LD-pruned SNPs, a geographic distance matrix using the longitude and latitude coordinates of each sample, and defined an outer boundary polygon using https://www.keene.edu/campus/maps/tool/. 
 
 ### Fst
+We evaluated the genomic landscape of differentiation between *cincta*, *atropygialis*, and *hecki* by calculating Fst between each taxon pair using [vcftools](https://vcftools.sourceforge.net) (v0.1.16). We restricted Fst analyses to the WGS dataset because it captures a far more complete representation of genomic variation than the ddRAD dataset. We first examined Fst in 20 kb sliding windows with 10 kb steps and then calculated Fst per SNP after removing singleton sites. For calculations on the Z chromosome, we restricted analysis to males to circumvent any potential issues associated with female hemizygosity. 
+
+### population branch statistic (PBSn1)
+We investigated subspecies specific differentiation patterns within the black-throated finch using the normalized population branch statistic (PBSn1) in 20 kb sliding windows with the long-tailed finch as outgroup. This modified version of the original PBS statistic rescales by total tree length and has been shown by [Shpak et al., 2024](https://doi.org/10.1101/2024.05.14.594139) to have a lower false positive rate in identifying local selective sweeps.
 
 ### private alleles
+We counted the number of private alleles in each taxon and sampling location using a custom perl script from [Shogren et al., 2024](https://github.com/ehshogren/MyzomelaPopulationGenomics). Private alleles were called as monomorphic or biallelic sites observed only in the focal taxon (i.e., *atropygialis*, *cincta*, or *hecki*) and present in at least five individuals. We subsequently scored each sampling location where individuals carrying that private allele were sampled. To quantify the proportion of genetic diversity unique to each sampling locality, we then calculated the proportion of private alleles found in each taxon that were also unique to each sampled population.
 
 ## heterozygosity, relatedness, and inbreeding
 
 ### observed heterozygosity
+We compared genetic diversity in each of our three taxa based on the observed number of heterozygous genotypes in each sample. For the WGS dataset, we estimated mean site-based heterozygosity as the number of heterozygous genotypes on the 29 largest autosomal chromosomes divided by the summed non-repeat masked length of these chromosomes. For the ddRAD dataset, we estimated mean site-based heterozygosity as the total number of heterozygous autosomal genotypes divided by the total number of autosomal SNPs. To account for variation in missingness per sample in the ddRAD dataset, we removed 5 samples missing data at more than 20% of sites and then restricted analyses to the set of SNPs without any missing data across the remaining 251 samples. Counts of heterozygous genotypes were performed using [bcftools](http://samtools.github.io/bcftools/bcftools.html) (v1.9) without a minor allele frequency filter. 
 
 ### pairwise relatedness
+We examined variation in relatedness within and between our sampled populations by calculating the pairwise kinship coefficient between all samples in the ddRAD dataset using [KING](https://www.kingrelatedness.com) (v2.3.1). We defined 1st degree (kinship ≥0.18-0.35), 2nd degree (kinship ≥0.09-0.18), and 3rd degree (kinship ≥0.04-0.09) relatives based on the expected distribution of pairwise kinship coefficients for these relationships.
 
 ### runs of homozygosity
+We evaluated evidence of inbreeding across populations in our sample set by contrasting the proportion of the genome observed in runs of homozygosity (i.e., FROH). We additionally evaluated the number and lengths of runs of homozygosity (ROH) across the genome as the length distribution of ROH can be especially informative about the timing of inbreeding events. We classified ROH and estimated FROH using autosomal SNPs with [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09) with default parameter tuning. We did not perform LD pruning or allele frequency filtering of this dataset because of the downward-biased effect of these filters on estimates of FROH. We restricted ROH analysis to the WGS dataset because it has a marker density two orders of magnitude greater than the ddRAD dataset (WGS: 25.6 SNPs per kb; ddRAD: 0.26 SNPs per kb).
 
 ## demographic inference
 
 ### RAxML
+We built maximum likelihood trees including all three taxa using both the WGS and ddRAD datasets with [RAxML](https://github.com/stamatak/standard-RAxML) (v8.2.4). We used [vcftools](https://vcftools.sourceforge.net) (v0.1.16) to generate a set of physically thinned SNP variants (WGS: 10 kb thinned; ddRAD: 5 kb thinned) with a minor allele count of at least two. We converted resulting VCF files to PHYLIP format using the [vcf2phylip](https://github.com/edgardomortiz/vcf2phylip) python script. For the WGS dataset, this resulted in 99,716 SNPs, 51,882 of which (those that had a minor allele in homozygosity in at least one individual) could be used for building a maximum likelihood tree. For the ddRAD dataset, this resulted in 10,632 SNPs, 6,650 could be used for maximum likelihood tree building. For both datasets, we implemented the ASC_GTRGAMMA model in combination with the Lewis correction for SNP ascertainment bias and carried out 350 bootstrap replicates. 
 
 ### PSMC
 
