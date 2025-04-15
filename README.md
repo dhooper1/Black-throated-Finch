@@ -98,9 +98,18 @@ We performed demographic inference at two timescales. In the first, focused on t
 We tested an initial suite of two-population models that encompassed 12 scenarios that varied in a) the timing of divergence, b) the number of distinct migration rates, c) the number and nature of population size fluctuations, and d) the size of ancestral populations. We performed 100 independent parameter runs per model using the following options: -n 100000 -L 100 -C 1 -y 5 -0 -m -q –logprecision 18 –brentol 0.0001.
 
 ```
-folder="/mendel-nas1/dhooper/bin/miniconda3/envs/fastsimcoal/bin"
-
 ## Select desired demographic model
+#prefix="2Pop0Mig"
+#prefix="2Pop0Mig1Size.A"
+#prefix="2Pop0Mig1Size.C"
+#prefix="2Pop0Mig2Size"
+#prefix="2Pop1Mig"
+#prefix="2Pop1Mig1Size.A"
+#prefix="2Pop1Mig1Size.C"
+#prefix="2Pop1Mig2Size"
+#prefix="2Pop2Mig"
+#prefix="2Pop2Mig1Size.A"
+#prefix="2Pop2Mig1Size.C"
 prefix="2Pop2Mig2Size"
 
 ## Use fastsimcoal2 v27 to model various demographic histories of the black-throated finch
