@@ -70,6 +70,14 @@ We evaluated evidence of inbreeding across populations in our sample set by cont
 ### RAxML
 We built maximum likelihood trees including all three taxa using both the WGS and ddRAD datasets with [RAxML](https://github.com/stamatak/standard-RAxML) (v8.2.4). We used [vcftools](https://vcftools.sourceforge.net) (v0.1.16) to generate a set of physically thinned SNP variants (WGS: 10 kb thinned; ddRAD: 5 kb thinned) with a minor allele count of at least two. We converted resulting VCF files to PHYLIP format using the [vcf2phylip](https://github.com/edgardomortiz/vcf2phylip) python script. For the WGS dataset, this resulted in 99,716 SNPs, 51,882 of which (those that had a minor allele in homozygosity in at least one individual) could be used for building a maximum likelihood tree. For the ddRAD dataset, this resulted in 10,632 SNPs, 6,650 could be used for maximum likelihood tree building. For both datasets, we implemented the ASC_GTRGAMMA model in combination with the Lewis correction for SNP ascertainment bias and carried out 350 bootstrap replicates. 
 
+```
+## Select input data with desired physical thinning between SNPs
+thin="5k"
+
+## Run RAxML for real with updated alignment file
+raxmlHPC-PTHREADS-SSE3 -T 20 -f a -x 1001 -p 14850 -N autoMRE -m ASC_GTRGAMMA --asc-corr=lewis -s ddRAD.btfs_ltfs.raxml.${thin}_thin.filter.run.phy -n ddRAD.btfs_ltfs.raxml.${thin}_thin.tre
+```
+
 ### PSMC
 
 ### fastsimcoal
