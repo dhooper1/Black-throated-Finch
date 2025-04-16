@@ -44,7 +44,7 @@ Genotype data for black-throated finches was prepared by removing SNPs found in 
 
 Example script for generating input genotype set and running fastStructure at a range of values of K
 ```
-cd /mendel-nas1/dhooper/ddRAD/
+cd /mendel-nas1/dhooper/BTFs/ddRAD/
 
 VCF="220418.BTFs.LTFs.missing65.mm80.nomaf.nomac.vcf.gz"
 
@@ -74,8 +74,8 @@ We evaluated the genomic landscape of differentiation between *cincta*, *atropyg
 
 Example window-based Fst calculations using the WGS dataset:
 ```
-cd /mendel-nas1/dhooper/BTFs
-out_dir="/mendel-nas1/dhooper/BTFs/Fst"
+cd /mendel-nas1/dhooper/BTFs/WGS/
+out_dir="/mendel-nas1/dhooper/BTFs/WGS/Fst"
 
 ## Calculate Fst in 20 kb sliding windows with 10 kb steps along autosomal genome
 vcftools --gzvcf wg.btfs_ltfs.repeatmask.filter.vcf.gz --remove-filtered-all --max-missing 0.9 --not-chr chrZ --weir-fst-pop pca.pop --weir-fst-pop pah.pop --fst-window-size 20000 --fst-window-step 10000 --mac 2 --out ${out_dir}/auto.pca_pah.20kb_10kb_step
@@ -110,7 +110,7 @@ We compared genetic diversity in each of our three taxa based on the observed nu
 ```
 ## Use bcftools to count the number of autosomal heterozygous sites without any missing data in the ddRAD dataset
 
-cd /mendel-nas1/dhooper/ddRAD/heterozygosity
+cd /mendel-nas1/dhooper/BTFs/ddRAD/heterozygosity
 out_dir="/mendel-nas1/dhooper/ddRAD/heterozygosity/results"
 
 ## Restrict analysis to the set of 251 samples with less than 20% missing data
@@ -129,7 +129,7 @@ We evaluated evidence of inbreeding across populations in our sample set by cont
 ## Use plink to evaluate ROH in the BTF and LTF samples using the WGS dataset
 ## Note that we need to use the plink dataset without LD-pruning
 
-cd /mendel-nas1/dhooper/BTFs/popgen
+cd /mendel-nas1/dhooper/BTFs/WGS/popgen
 
 ## Step #1: Use plink to calculate ROH
 INPUT="wg.btfs_ltfs.repeatmask"
@@ -167,7 +167,7 @@ runBC=`basename $bam .bam`
 sample=`echo $runBC | cut -f1 -d'.'`
 lower="10"
 upper="110"
-out_dir="/mendel-nas1/dhooper/BTFs/psmc"
+out_dir="/mendel-nas1/dhooper/BTFs/WGS/psmc"
 
 ## Generate consensus sequence
 samtools mpileup -l ${positions} -Q 30 -q 30 -u -v -f ${ref} ${bam} | bcftools call -c | vcfutils.pl vcf2fq -d ${lower} -D ${upper} -Q 30 | gzip > ${out_dir}/${sample}.Q30.autosomal.fq.gz
@@ -267,7 +267,7 @@ done
 Perform 50 replicates for each of the 100 non-parametric bootstrap 2D-SFS to generate 95% confidince intervals under the best-fitting scenario:
 ```
 folder="/mendel-nas1/dhooper/bin/miniconda3/envs/fastsimcoal/bin"
-boot_dir="/mendel-nas1/dhooper/ddRAD/demographics/input_data/bootstrap"
+boot_dir="/mendel-nas1/dhooper/BTFs/ddRAD/demographics/input_data/bootstrap"
 prefix="2Pop0Mig1Size.T"
 
 for i in {1..100}; do
