@@ -111,13 +111,15 @@ We compared genetic diversity in each of our three taxa based on the observed nu
 ## Use bcftools to count the number of autosomal heterozygous sites without any missing data in the ddRAD dataset
 
 cd /mendel-nas1/dhooper/BTFs/ddRAD/heterozygosity
-out_dir="/mendel-nas1/dhooper/ddRAD/heterozygosity/results"
+out_dir="/mendel-nas1/dhooper/BTFs/ddRAD/heterozygosity/results"
 
 ## Restrict analysis to the set of 251 samples with less than 20% missing data
 cat samples.miss20.list | while read LINE; do
         bcftools query -s ${LINE} -i 'GT="0|1" | GT="0/1"' -f '%CHROM:%POS\n' 240709.BTFs.LTFs.no_missing_data_autosomal.vcf.gz | wc -l > ${out_dir}/${LINE}.autosomal.het_sites.miss20.out;
 done
 ```
+
+See R script plot.hetero.BTFs.R above for details about plotting observed heterozygosity results.
 
 ### pairwise relatedness
 We examined variation in relatedness within and between our sampled populations by calculating the pairwise kinship coefficient between all samples in the ddRAD dataset using [KING](https://www.kingrelatedness.com) (v2.3.1). We defined 1st degree (kinship ≥0.18-0.35), 2nd degree (kinship ≥0.09-0.18), and 3rd degree (kinship ≥0.04-0.09) relatives based on the expected distribution of pairwise kinship coefficients for these relationships.
