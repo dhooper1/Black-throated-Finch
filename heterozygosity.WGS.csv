@@ -1,0 +1,201 @@
+﻿IID,FID,Taxon,Population,Longitude,Latitude,Sex,Heterozygosity
+BT20,CG,atropygialis,Chillagoe,144.04,-16.69,male,0.003856243
+BT21,CG,atropygialis,Chillagoe,144.04,-16.69,female,0.003893883
+BT142,CR,atropygialis,Coralie,142.17,-18.27,female,0.003913647
+BT08,DR,atropygialis,Durham Dam,143.48,-18.29,male,0.003732954
+BT07,DR,atropygialis,Durham Dam,143.48,-18.29,female,0.003753459
+BT09,DR,atropygialis,Durham Dam,143.48,-18.29,male,0.003757298
+BT05,HB,atropygialis,Highbury,143.1,-16.4,female,0.003788846
+BT01,HR,atropygialis,Holroyd River,142.64,-14.18,male,0.003368966
+BT03,HR,atropygialis,Holroyd River,142.64,-14.18,male,0.003800281
+BT04,HR,atropygialis,Holroyd River,142.64,-14.18,female,0.003848382
+BT02,HR,atropygialis,Holroyd River,142.64,-14.18,female,0.003864867
+BT18,IS,atropygialis,Inkerman Station,141.47,-16.2,male,0.003691139
+BT19,IS,atropygialis,Inkerman Station,141.47,-16.2,male,0.003799966
+BT15,KW,atropygialis,Kowanyama,141.7,-15.36,female,0.003795868
+BT119,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003738187
+BT112,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003784007
+BT106,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003786277
+BT108,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003817226
+BT103,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.00381937
+BT104,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003831049
+BT110,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003832961
+BT111,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003839599
+BT114,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003847856
+BT105,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003849176
+BT123,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003849905
+BT122,NP,atropygialis,Nifold Plains,143.97,-14.64,male,0.003869852
+BT129,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003881086
+BT102,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003888583
+BT121,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003910417
+BT120,NP,atropygialis,Nifold Plains,143.97,-14.64,female,0.003952893
+BT135,PP,atropygialis,Pormpuraaw,141.62,-14.91,male,0.003859164
+BT80,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.0037503
+BT70,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003752176
+BT44,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003757103
+BT88,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003757656
+BT57,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003783122
+BT81,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003783674
+BT84,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003788605
+BT55,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.00380251
+BT85,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003815199
+BT69,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003817723
+BT49,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003839987
+BT93,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,male,0.003844569
+BT47,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003854464
+BT86,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003862863
+BT361,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003870965
+BT61,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,female,0.003878489
+BT51,RL,atropygialis,Red Lily Lagoon,144.16,-14.85,unknown,0.004149485
+BT29,AD,cincta,Adani Dam,146.26,-21.92,male,0.003263591
+BT206,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003640299
+BT198,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003657873
+BT215,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003661086
+BT187,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.00368877
+BT197,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.00369248
+BT191,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003698993
+BT213,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003700346
+BT205,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003711636
+BT183,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003714981
+BT204,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003715734
+BT185,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003719005
+BT202,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003728938
+BT196,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003734376
+BT199,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.00373548
+BT214,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003736994
+BT186,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003739043
+BT200,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003743022
+BT182,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003750483
+BT189,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.003788783
+BT190,CD,cincta,Clearwater Dam,146.71,-19.46,female,0.003796991
+BT179,CD,cincta,Clearwater Dam,146.71,-19.46,unknown,0.00395293
+BT180,CD,cincta,Clearwater Dam,146.71,-19.46,unknown,0.004022178
+BT181,CD,cincta,Clearwater Dam,146.71,-19.46,male,0.004051614
+BT221,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003606939
+BT225,YD,cincta,Yellow Dam,146.66,-19.48,female,0.00361199
+BT223,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003634114
+BT229,YD,cincta,Yellow Dam,146.66,-19.48,female,0.00367955
+BT222,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003693881
+BT235,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003711675
+BT237,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003718635
+BT228,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003724363
+BT227,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003730857
+BT217,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003732782
+BT226,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003735864
+BT224,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003741756
+BT241,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003748314
+BT240,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003751446
+BT238,YD,cincta,Yellow Dam,146.66,-19.48,male,0.003752264
+BT233,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003761177
+BT239,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003767999
+BT236,YD,cincta,Yellow Dam,146.66,-19.48,female,0.003791799
+CH17,CH,hecki,Chidna,139.446,-19.387,male,0.004371155
+CH16,CH,hecki,Chidna,139.446,-19.387,male,0.004381708
+CH07,CH,hecki,Chidna,139.446,-19.387,male,0.004401378
+CH06,CH,hecki,Chidna,139.446,-19.387,male,0.004419689
+CH04,CH,hecki,Chidna,139.446,-19.387,male,0.004437575
+CH20,CH,hecki,Chidna,139.446,-19.387,male,0.004437721
+CH12,CH,hecki,Chidna,139.446,-19.387,male,0.004451951
+CH09,CH,hecki,Chidna,139.446,-19.387,male,0.004460326
+CH15,CH,hecki,Chidna,139.446,-19.387,female,0.004462307
+CH13,CH,hecki,Chidna,139.446,-19.387,male,0.004476148
+CH02,CH,hecki,Chidna,139.446,-19.387,male,0.004476967
+CH19,CH,hecki,Chidna,139.446,-19.387,female,0.004482983
+CH03,CH,hecki,Chidna,139.446,-19.387,female,0.004496213
+CH05,CH,hecki,Chidna,139.446,-19.387,male,0.004498721
+CH14,CH,hecki,Chidna,139.446,-19.387,female,0.004499195
+CH01,CH,hecki,Chidna,139.446,-19.387,male,0.004504928
+CH18,CH,hecki,Chidna,139.446,-19.387,female,0.004512823
+CH10,CH,hecki,Chidna,139.446,-19.387,male,0.00452566
+CH08,CH,hecki,Chidna,139.446,-19.387,male,0.00455479
+CH11,CH,hecki,Chidna,139.446,-19.387,female,0.004567267
+LH10,LH,hecki,Leichardt,139.736,-20.263,male,0.004308986
+LH11,LH,hecki,Leichardt,139.736,-20.263,male,0.004346934
+LH05,LH,hecki,Leichardt,139.736,-20.263,male,0.004356425
+LH04,LH,hecki,Leichardt,139.736,-20.263,female,0.004373378
+LH13,LH,hecki,Leichardt,139.736,-20.263,female,0.004401193
+LH01,LH,hecki,Leichardt,139.736,-20.263,female,0.004416337
+LH15,LH,hecki,Leichardt,139.736,-20.263,male,0.004421837
+LH02,LH,hecki,Leichardt,139.736,-20.263,male,0.00443087
+LH03,LH,hecki,Leichardt,139.736,-20.263,female,0.004449204
+LH12,LH,hecki,Leichardt,139.736,-20.263,male,0.004481223
+LH09,LH,hecki,Leichardt,139.736,-20.263,male,0.004490812
+LH06,LH,hecki,Leichardt,139.736,-20.263,female,0.004676437
+LH07,LH,hecki,Leichardt,139.736,-20.263,male,0.004818334
+LH08,LH,hecki,Leichardt,139.736,-20.263,female,0.004866044
+LH14,LH,hecki,Leichardt,139.736,-20.263,female,0.0049831
+LS01,LS,hecki,Lorella Springs,135.629,-15.624,male,0.004454632
+LS02,LS,hecki,Lorella Springs,135.629,-15.624,male,0.004468337
+LS03,LS,hecki,Lorella Springs,135.629,-15.624,male,0.004518469
+MA11,MA,hecki,MacArthur River,135.869,-16.508,female,0.004328639
+MA06,MA,hecki,MacArthur River,135.869,-16.508,male,0.004358623
+MA12,MA,hecki,MacArthur River,135.869,-16.508,male,0.004368257
+MA14,MA,hecki,MacArthur River,135.869,-16.508,female,0.004387276
+MA05,MA,hecki,MacArthur River,135.869,-16.508,female,0.004390021
+MA13,MA,hecki,MacArthur River,135.869,-16.508,male,0.004439216
+MA01,MA,hecki,MacArthur River,135.869,-16.508,female,0.004445943
+MA04,MA,hecki,MacArthur River,135.869,-16.508,female,0.004446907
+MA10,MA,hecki,MacArthur River,135.869,-16.508,female,0.00445833
+MA09,MA,hecki,MacArthur River,135.869,-16.508,male,0.004467667
+MA07,MA,hecki,MacArthur River,135.869,-16.508,female,0.004470419
+MA15,MA,hecki,MacArthur River,135.869,-16.508,female,0.004471445
+MA08,MA,hecki,MacArthur River,135.869,-16.508,female,0.004484584
+MY08,MY,hecki,Maryfield,133.402,-15.832,male,0.004336866
+MY05,MY,hecki,Maryfield,133.402,-15.832,male,0.004360541
+MY04,MY,hecki,Maryfield,133.402,-15.832,male,0.004415194
+MY06,MY,hecki,Maryfield,133.402,-15.832,male,0.004416315
+MY15,MY,hecki,Maryfield,133.402,-15.832,female,0.004426152
+MY14,MY,hecki,Maryfield,133.402,-15.832,male,0.004488141
+MY07,MY,hecki,Maryfield,133.402,-15.832,female,0.004489681
+MY09,MY,hecki,Maryfield,133.402,-15.832,female,0.004490897
+MY12,MY,hecki,Maryfield,133.402,-15.832,male,0.004491201
+MY13,MY,hecki,Maryfield,133.402,-15.832,male,0.004498313
+MY10,MY,hecki,Maryfield,133.402,-15.832,male,0.004543769
+MY11,MY,hecki,Maryfield,133.402,-15.832,female,0.004551583
+MY01,MY,hecki,Maryfield,133.402,-15.832,male,0.004562002
+MY02,MY,hecki,Maryfield,133.402,-15.832,male,0.004711183
+MY03,MY,hecki,Maryfield,133.402,-15.832,male,0.004759565
+OC04,OC,hecki,October Creek,134.86,-16.631,male,0.004289553
+OC03,OC,hecki,October Creek,134.86,-16.631,female,0.004332892
+73787,OC,hecki,October Creek,134.86,-16.631,male,0.004356221
+73793,OC,hecki,October Creek,134.86,-16.631,female,0.004360871
+OC13,OC,hecki,October Creek,134.86,-16.631,female,0.004389971
+73792,OC,hecki,October Creek,134.86,-16.631,female,0.004406529
+73959,OC,hecki,October Creek,134.86,-16.631,male,0.004434446
+OC09,OC,hecki,October Creek,134.86,-16.631,male,0.004445387
+73958,OC,hecki,October Creek,134.86,-16.631,male,0.00446822
+OC11,OC,hecki,October Creek,134.86,-16.631,male,0.004473209
+73788,OC,hecki,October Creek,134.86,-16.631,female,0.004474673
+OC05,OC,hecki,October Creek,134.86,-16.631,female,0.004487443
+OC10,OC,hecki,October Creek,134.86,-16.631,female,0.004490583
+OC07,OC,hecki,October Creek,134.86,-16.631,male,0.004494161
+OC12,OC,hecki,October Creek,134.86,-16.631,female,0.004499386
+OC02,OC,hecki,October Creek,134.86,-16.631,male,0.004515741
+73948,OC,hecki,October Creek,134.86,-16.631,female,0.004528795
+73933,OC,hecki,October Creek,134.86,-16.631,male,0.004532926
+OC01,OC,hecki,October Creek,134.86,-16.631,female,0.004549165
+OC14,OC,hecki,October Creek,134.86,-16.631,female,0.004549667
+73903,OC,hecki,October Creek,134.86,-16.631,female,0.004577758
+73782,OC,hecki,October Creek,134.86,-16.631,male,0.004583766
+73940,OC,hecki,October Creek,134.86,-16.631,male,0.004603978
+73942,OC,hecki,October Creek,134.86,-16.631,male,0.00460817
+73908,OC,hecki,October Creek,134.86,-16.631,male,0.004610673
+73953,OC,hecki,October Creek,134.86,-16.631,male,0.004619219
+73900,OC,hecki,October Creek,134.86,-16.631,female,0.004628871
+73920,OC,hecki,October Creek,134.86,-16.631,male,0.004631507
+73955,OC,hecki,October Creek,134.86,-16.631,male,0.00463472
+73937,OC,hecki,October Creek,134.86,-16.631,male,0.004651778
+73917,OC,hecki,October Creek,134.86,-16.631,male,0.00465811
+73936,OC,hecki,October Creek,134.86,-16.631,male,0.004664748
+73945,OC,hecki,October Creek,134.86,-16.631,male,0.004666149
+73780,OC,hecki,October Creek,134.86,-16.631,male,0.004675714
+73972,OC,hecki,October Creek,134.86,-16.631,male,0.004679503
+73938,OC,hecki,October Creek,134.86,-16.631,male,0.004682137
+73960,OC,hecki,October Creek,134.86,-16.631,male,0.004689691
+73966,OC,hecki,October Creek,134.86,-16.631,male,0.004700564
+73946,OC,hecki,October Creek,134.86,-16.631,male,0.004715766
+73783,OC,hecki,October Creek,134.86,-16.631,male,0.004747559
+73791,OC,hecki,October Creek,134.86,-16.631,male,0.004825322
+PR03,PR,hecki,Port Roper,134.364,-14.757,male,0.004377697
+PR01,PR,hecki,Port Roper,134.364,-14.757,female,0.004428573
+PR02,PR,hecki,Port Roper,134.364,-14.757,female,0.004494311

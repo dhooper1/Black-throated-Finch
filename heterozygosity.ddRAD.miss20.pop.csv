@@ -1,0 +1,24 @@
+﻿FID,Taxon,Population,Longitude,Latitude,N,Mean.Het
+CG,atropygialis,Chillagoe,144.040,-16.690,2,0.0428
+CR,atropygialis,Coralie,142.170,-18.270,1,0.0406
+DR,atropygialis,Durham Dam,143.480,-18.290,3,0.0429
+HB,atropygialis,Highbury,143.100,-16.400,1,0.0421
+HR,atropygialis,Holroyd River,142.640,-14.180,4,0.0425
+IS,atropygialis,Inkerman Station,141.470,-16.200,3,0.0417
+KL,atropygialis,Kalpowar,144.180,-14.500,1,0.0415
+KO,atropygialis,Kowanyama,141.700,-15.360,6,0.0423
+ME,atropygialis,Mareeba,145.350,-16.930,14,0.0434
+MR,atropygialis,Mcilwraith Range,143.470,-13.860,2,0.0491
+NP,atropygialis,Nifold Plains,143.970,-14.640,22,0.0423
+PP,atropygialis,Pormpuraaw,141.620,-14.910,4,0.0471
+RL,atropygialis,Red Lily Lagoon,144.160,-14.850,39,0.0429
+AD,cincta,Adani Dam,146.260,-21.920,39,0.0426
+AW,cincta,Anthill West,146.850,-19.440,4,0.0403
+CD,cincta,Clearwater Dam,146.710,-19.460,40,0.037
+DD,cincta,Dotterel Dam,146.840,-19.570,5,0.0448
+FD,cincta,Ford's Dam,146.860,-19.500,27,0.0435
+MD,cincta,Mango Dam,146.860,-19.490,4,0.0416
+SC,cincta,Sunbird Creek,146.780,-19.420,5,0.0387
+YD,cincta,Yellow Dam,146.660,-19.480,12,0.0382
+CH,hecki,Chidna,139.446,-19.387,7,0.0509
+LH,hecki,Leichardt,139.736,-20.263,6,0.0504
