@@ -142,6 +142,26 @@ bcftools index ${DATE}.BTFs.LTFs.whole_genome.hq_snps.vcf.gz
 ### principal component analysis (PCA)
 We performed PCA with [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09) using the full dataset and sequential subsets of the full dataset. First, using both black-throated finch and long-tailed finch samples. Second, only using samples from the two black-throated finch subspecies. Third, only using samples from the endangered black-throated finch subspecies *cincta*. For the WGS dataset, we removed SNPs <1 kb apart, with a minor allele frequency less than 0.05, and genotyped in less than 0.95 of samples. For the ddRAD dataset, we removed singleton sites and SNPs <1 kb apart.
 
+Example script for performing the PCA analyses shown in Figure 3:
+```
+## Use PLINK to perform PCA for cincta samples using ddRAD dataset
+
+cd /mendel-nas1/dhooper/BTFs/ddRAD/
+
+out_dir="/mendel-nas1/dhooper/BTFs/ddRAD/PCA"
+
+## Convert VCF to BED, AF and randomly filter sites, and perform PCA
+plink --allow-extra-chr --chr-set 40 --out ${out_dir}/ddRAD.btfs_ltfs.no_captives.mm85.AF --make-bed --vcf ddRAD.btfs_ltfs.no_captives.mm85.AF.vcf.gz
+
+## Perform PCA with 1kb SNP distance filter, singletons removed, and SNPs with data in <85% of samples removed
+plink --bfile ${out_dir}/ddRAD.btfs_ltfs.no_captives.mm85.AF --allow-extra-chr --chr-set 40 --keep cincta.all.pop --geno 0.15 --mac 2 --bp-space 1000 --pca 10 header tabs --allow-no-sex --out ${out_dir}/ddRAD.cincta.all.mm85.mac2.1kb_thin.pca1-10
+plink --bfile ${out_dir}/ddRAD.btfs_ltfs.no_captives.mm85.AF --allow-extra-chr --chr-set 40 --keep cincta.minus_GB.pop --geno 0.15 --mac 2 --bp-space 1000 --pca 10 header tabs --allow-no-sex --out ${out_dir}/ddRAD.cincta.minus_GB.mm85.mac2.1kb_thin.pca1-10
+plink --bfile ${out_dir}/ddRAD.btfs_ltfs.no_captives.mm85.AF --allow-extra-chr --chr-set 40 --keep cincta.minus_GB_SC.pop --geno 0.15 --mac 2 --bp-space 1000 --pca 10 header tabs --allow-no-sex --out ${out_dir}/ddRAD.cincta.minus_GB_SC.mm85.mac2.1kb_thin.pca1-10
+rm ${out_dir}/*nosex
+```
+
+See R script plot.PCA.cincta.R above for details about plotting the PCA results in the panels of Figure 3D.
+
 ### fastStructure
 Genotype data for black-throated finches was prepared by removing SNPs found in linkage disequilibrium (i.e., r2 > 0.2) in 100 kb windows and 10 kb steps using [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09). We then ran [fastStructure](https://rajanil.github.io/fastStructure/) (v1.0) with ten cross-validation tests and values of K ranging from 2 to 5. The optimal model complexity was determined using the chooseK.py function of fastStructure. We restricted this analysis to the ddRAD dataset due to the greater breadth (i.e., sampled populations) and depth (i.e., sampled individuals) of coverage compared to the WGS dataset.
 
