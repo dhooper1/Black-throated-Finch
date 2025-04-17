@@ -242,7 +242,7 @@ cat samples.miss20.list | while read LINE; do
 done
 ```
 
-See R script plot.hetero.BTFs.R above for details about plotting observed heterozygosity results.
+See R script plot.heterozygosity.BTFs.R above for details about plotting observed heterozygosity results.
 
 ### pairwise relatedness
 We examined variation in relatedness within and between our sampled populations by calculating the pairwise kinship coefficient between all samples in the ddRAD dataset using [KING](https://www.kingrelatedness.com) (v2.3.1). We defined 1st degree (kinship ≥0.18-0.35), 2nd degree (kinship ≥0.09-0.18), and 3rd degree (kinship ≥0.04-0.09) relatives based on the expected distribution of pairwise kinship coefficients for these relationships.
