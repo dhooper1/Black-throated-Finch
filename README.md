@@ -190,7 +190,16 @@ python ${WORK_DIR}/structure.py -K 5 --input ${INPUT} --cv 10 --output fastStruc
 ```
 
 ### FEEMS
-The program [FEEMS](https://github.com/NovembreLab/feems) (Fast Estimation of Effective Migration Surfaces) uses a Gaussian Markov Random Field model to infer and visualize spatially heterogeneous isolation-by-distance patterns (i.e., effective migration rates) on a geographic surface. We generated a genetic distance matrix between samples using a set of LD-pruned SNPs, a geographic distance matrix using the longitude and latitude coordinates of each sample, and defined an outer boundary polygon using https://www.keene.edu/campus/maps/tool/. 
+The program [FEEMS](https://github.com/NovembreLab/feems) (Fast Estimation of Effective Migration Surfaces) uses a Gaussian Markov Random Field model to infer and visualize spatially heterogeneous isolation-by-distance patterns (i.e., effective migration rates) on a geographic surface. We generated a genetic distance matrix between samples using a set of LD-pruned SNPs, a geographic distance matrix using the longitude and latitude coordinates of each sample, and defined an outer boundary polygon using https://www.keene.edu/campus/maps/tool/.
+
+The documentation for [FEEMS](https://github.com/NovembreLab/feems) includes a really helpful tutorial for anyone looking to get started.
+
+See python script run_feems.220418.BTFs.py and associated input files above - listed below - for reproducing the FEEMS panel in Figure 2B.
+- 220418.BTFs.miss65.mm80.feems.[bed/bim/fam] (Input genotype data in plink format]
+- feems_BTFs.LTFs.miss65.mm80.samples.coord (Sample collection LONG/LAT coordinates]
+- feems_BTFs.range.outer (Outer coordinates for geographic region of interest)
+- world_triangle_res8.[shp/shx] (Discrete global grid)
+
 
 ### Fst
 We evaluated the genomic landscape of differentiation between *cincta*, *atropygialis*, and *hecki* by calculating Fst between each taxon pair using [vcftools](https://vcftools.sourceforge.net) (v0.1.16). We restricted Fst analyses to the WGS dataset because it captures a far more complete representation of genomic variation than the ddRAD dataset. We first examined Fst in 20 kb sliding windows with 10 kb steps and then calculated Fst per SNP after removing singleton sites. For calculations on the Z chromosome, we restricted analysis to males to circumvent any potential issues associated with female hemizygosity.
