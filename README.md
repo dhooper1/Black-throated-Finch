@@ -161,7 +161,7 @@ plink --bfile ${out_dir}/ddRAD.btfs_ltfs.no_captives.mm85.AF --allow-extra-chr -
 rm ${out_dir}/*nosex
 ```
 
-See R script plot.PCA.cincta.R and associated input files above for details about plotting the PCA results in the panels of Figure 3D.
+See R script [plot.PCA.cincta.R](https://github.com/dhooper1/Black-throated-Finch/blob/main/plot.PCA.cincta.R) and associated input files above for details about plotting the PCA results in the panels of Figure 3D.
 
 ### fastStructure
 Genotype data for black-throated finches was prepared by removing SNPs found in linkage disequilibrium (i.e., r2 > 0.2) in 100 kb windows and 10 kb steps using [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09). We then ran [fastStructure](https://rajanil.github.io/fastStructure/) (v1.0) with ten cross-validation tests and values of K ranging from 2 to 5. The optimal model complexity was determined using the chooseK.py function of fastStructure. We restricted this analysis to the ddRAD dataset due to the greater breadth (i.e., sampled populations) and depth (i.e., sampled individuals) of coverage compared to the WGS dataset.
@@ -195,7 +195,7 @@ The program [FEEMS](https://github.com/NovembreLab/feems) (Fast Estimation of Ef
 
 The documentation for [FEEMS](https://github.com/NovembreLab/feems) includes a really helpful tutorial for anyone looking to get started. See the tutorial for how to generate the required discrete global grid shape files - these files are too large to upload and share here.
 
-See python script run_feems.220418.BTFs.py and associated input files above - listed below - for reproducing the FEEMS panel in Figure 2B.
+See python script [run_feems.220418.BTFs.py](https://github.com/dhooper1/Black-throated-Finch/blob/main/run_feems.220418.BTFs.py) and associated input files above - listed below - for reproducing the FEEMS panel in Figure 2B.
 - 220418.BTFs.miss65.mm80.feems.[bed/bim/fam] (Input genotype data in plink format]
 - feems_BTFs.LTFs.miss65.mm80.samples.coord (Sample collection LONG/LAT coordinates]
 - feems_BTFs.range.outer (Outer coordinates for geographic region of interest)
@@ -225,12 +225,12 @@ cat auto.pcc_pah.20kb_10kb_step.windowed.weir.fst chrZ.pcc_pah.20kb_10kb_step.wi
 cat auto.pca_pcc.20kb_10kb_step.windowed.weir.fst chrZ.pca_pcc.20kb_10kb_step.windowed.weir.fst > wg.pca_pcc.20kb_10kb_step.windowed.weir.fst
 ```
 
-See R script plot.PBS.BTFs.R and associated input files above for details about generating Fst Manhattan plots.
+See R script [plot.PBS.BTFs.R](https://github.com/dhooper1/Black-throated-Finch/blob/main/plot.PBS.BTFs.R) and associated input files above for details about generating Fst Manhattan plots.
 
 ### population branch statistic (PBSn1)
 We investigated subspecies specific differentiation patterns within the black-throated finch using the normalized population branch statistic (PBSn1) in 20 kb sliding windows with the long-tailed finch as outgroup. This modified version of the original PBS statistic rescales by total tree length and has been shown by [Shpak et al., 2024](https://doi.org/10.1101/2024.05.14.594139) to have a lower false positive rate in identifying local selective sweeps.
 
-See R script plot.PBS.BTFs.R and associated input files above for details about calculating the normalized population branch statistic (PBSn1) using sliding window-based Fst results.
+See R script [plot.PBS.BTFs.R](https://github.com/dhooper1/Black-throated-Finch/blob/main/plot.PBS.BTFs.R) and associated input files above for details about calculating the normalized population branch statistic (PBSn1) using sliding window-based Fst results.
 
 ### private alleles
 We counted the number of private alleles in each taxon and sampling location using a custom perl script from [Shogren et al., 2024](https://github.com/ehshogren/MyzomelaPopulationGenomics). Private alleles were called as monomorphic or biallelic sites observed only in the focal taxon (i.e., *atropygialis*, *cincta*, or *hecki*) and present in at least five individuals. We subsequently scored each sampling location where individuals carrying that private allele were sampled. To quantify the proportion of genetic diversity unique to each sampling locality, we then calculated the proportion of private alleles found in each taxon that were also unique to each sampled population.
@@ -252,7 +252,7 @@ cat samples.miss20.list | while read LINE; do
 done
 ```
 
-See R script plot.heterozygosity.BTFs.R above for details about plotting observed heterozygosity results.
+See R script [plot.heterozygosity.BTFs.R](https://github.com/dhooper1/Black-throated-Finch/blob/main/plot.heterozygosity.BTFs.R) above for details about plotting observed heterozygosity results.
 
 ### pairwise relatedness
 We examined variation in relatedness within and between our sampled populations by calculating the pairwise kinship coefficient between all samples in the ddRAD dataset using [KING](https://www.kingrelatedness.com) (v2.3.1). We defined 1st degree (kinship ≥0.18-0.35), 2nd degree (kinship ≥0.09-0.18), and 3rd degree (kinship ≥0.04-0.09) relatives based on the expected distribution of pairwise kinship coefficients for these relationships.
