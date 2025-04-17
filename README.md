@@ -10,7 +10,7 @@ Software and programs used in this pipeline:
 - [bwa](https://bio-bwa.sourceforge.net/) (v0.7.17)
 - [samtools/bcftools](http://samtools.github.io/bcftools/bcftools.html)
 - [STITCH](https://github.com/rwdavies/STITCH) (v1.6.6)
-- [GATK](https://gatk.broadinstitute.org/hc/en-us)
+- [GATK](https://gatk.broadinstitute.org/hc/en-us) (v4.4)
 - [RepeatModeler](https://github.com/Dfam-consortium/RepeatModeler)
 - [vcftools](https://vcftools.sourceforge.net) (v0.1.16)
 - [plink](https://www.cog-genomics.org/plink/1.9/) (v1.09)
@@ -69,6 +69,73 @@ done
 ```
 
 ## variant discovery and genotyping [ddRAD data]
+Genotyping samples with ddRAD data was performed in accordance with [GATK](https://gatk.broadinstitute.org/hc/en-us) (v4.4) Best Practices. An initial set of variants were called for each sample for each chromosome using HaplotypeCaller in GVCF mode, GVCF output from all samples were then combined by chromosome using CombineGVCFs, and joint genotyping was performed using GenotypeGVCFs.
+
+Use GATK HaplotypeCaller to generate GVCF files for chromosome "chr1" for each sample:
+```
+REF="/mendel-nas1/dhooper/reference/GCF_003957565.2_bTaeGut1.4.fasta"
+INPUT_DIR="/mendel-nas1/dhooper/BTFs/ddRAD/BAMs"
+OUT_DIR="/mendel-nas1/dhooper/BTFs/ddRAD/VCFs"
+
+## Run GATK HaplotypeCaller on chr1 for all samples
+cat ddRAD.sample.list | while read LINE; do
+  java -Xmx5g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T HaplotypeCaller -R ${REF} -L chr1 -I ${INPUT_DIR}/${LINE}.PE.mkdup.bam --emitRefConfidence GVCF -nct 8 -nt 1 -o ${OUT_DIR}/${LINE}.chr1.g.vcf;
+done
+```
+
+Use GATK CombineGVCFs to combine all GVCF files for each chromosome:
+```
+REF="/mendel-nas1/dhooper/reference/GCF_003957565.2_bTaeGut1.4.fasta"
+
+cd /mendel-nas1/dhooper/BTFs/ddRAD/VCFs
+
+## Create list files of GVCF output for each chromosome
+cat chrom.list | while read LINE; do
+  ls *.${LINE}.g.vcf > all.samples.${LINE}.list;
+done
+
+## Run GATK CombineGVCFs
+cat chrom.list | while read LINE; do
+  java -Xmx75g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T CombineGVCFs -R ${REF} --variant all.samples.${LINE}.list -o BTFs.LTFs.${LINE}.g.vcf.gz;
+done
+```
+
+Use GATK GenotypeGVCFs to perform join genotyping and output an initial set of raw SNP/INDEL variants ready for filtering:
+```
+REF="/mendel-nas1/dhooper/reference/GCF_003957565.2_bTaeGut1.4.fasta"
+
+cd /mendel-nas1/dhooper/BTFs/ddRAD/VCFs
+
+## Run GATK GenotypeGVCFs
+cat chrom.list | while read LINE; do
+  java -Xmx75g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T GenotypeGVCFs -R ${REF} -nt 16 --variant BTFs.LTFs.${LINE}.g.vcf.gz -o BTFs.LTFs.${LINE}.raw_variants.vcf.gz;
+done
+```
+
+Perform hard quality filtering on the initial set of raw SNP/INDEL variants to produce a set of high-quality SNP variants:
+```
+REF="/mendel-nas1/dhooper/reference/GCF_003957565.2_bTaeGut1.4.fasta"
+DATE="220418"
+
+cd /mendel-nas1/dhooper/BTFs/ddRAD/VCFs
+
+## Run GATK SelectVariants
+cat chrom.list | while read LINE; do
+  java -Xmx75g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T SelectVariants -R ${REF} -V BTFs.LTFs.${LINE}.raw_variants.vcf.gz -selectType SNP -o BTFs.LTFs.${LINE}.raw_snps.vcf.gz;
+done
+
+## Apply hard SNP quality filters
+cat chrom.list | while read LINE; do
+  java -Xmx75g -jar /programs/bin/GATK/GenomeAnalysisTK.jar -T VariantFiltration -R ${REF} -V BTFs.LTFs.${LINE}.raw_snps.vcf.gz --filterExpression "QD < 2.0 || FS > 60.0 || MQ < 40.0 || MQRankSum < -12.5 || ReadPosRankSum < -8.0" --filterName "hard_snp_filter" -o BTFs.LTFs.${LINE}.hq_snps.vcf.gz;
+done
+
+## Merge high-quality SNP data by chromosome into a single genome-wide VCF file
+ls BTFs.LTFs.*.hq_snps.vcf.gz > VCF.list
+
+bcftools concat -f VCF.list -a -D -Oz -o ${DATE}.BTFs.LTFs.whole_genome.hq_snps.vcf.gz
+bcftools index ${DATE}.BTFs.LTFs.whole_genome.hq_snps.vcf.gz
+
+```
 
 ## population structure, genetic differentiation, and summary statistics
 
